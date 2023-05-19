@@ -1,5 +1,6 @@
 def prim(x):
     lista = []
+
     for a in range(1, n+1):
         contador = 0
         i = 1
