@@ -1,16 +1,39 @@
-arquivo = open("usuarios.txt")
-texto = arquivo.read()
+# Abre o arquivo para leitura
+arquivoEntrada = open('usuarios.txt')
+# Coloca todas as linhas em memoria
+linhas = arquivoEntrada.readlines()
+# Fecha o arquivo
+arquivoEntrada.close()
+linhas.sort()
+print(linhas)
 
-lista = texto.split('\n')
-soma = 0
-contador = 1
-print("N°   Nome       Espaço Utilizado")
-for i in lista:
-    nome, numero = i.split(',')
-    print(f"{contador}    {nome}    {numero}")
-    contador += 1
-    soma += int(numero)/1000000
+usuarios = []
+espacos_utilizados = []
+espaco_total = 0.0
+for linha in linhas:
+    campos = linha.split()
+    usuario = campos[0]
+    espaco_utilizado = int(campos[1])
+    usuarios.append(usuario)
+    espacos_utilizados.append(espaco_utilizado)
+    espaco_total += espaco_utilizado
 
-media = soma / len(lista)
-print(f"Espaço total ocupado: {soma:.2f} MB")
-print(f"Espaço médio ocupado: {media:.2f} MB")
+# Definição dos Textos e valores
+l1 = 'ACME Inc.               Uso do espaco em disco pelos usuarios\n'
+l2 = '-----------------------------------------------------------------------\n'
+l3 = 'Nr.  Usuario        Espaco utilizado     %% do uso'
+mega = (1024.0 * 1024.0)
+# Abre o arquivo para escrita
+saida = open('saida_ex1.txt', 'w')
+saida.write(l1)
+saida.write(l2)
+saida.write(l3)
+for i in range(len(usuarios)):
+    espacoMB = espacos_utilizados[i] / mega
+    percentual_uso = espacos_utilizados[i] / espaco_total
+    saida.write(f'\n{i+1} - {usuarios[i]:15} - {espacoMB:10.2f} - {percentual_uso:15.2%}')
+
+saida.write(f'\nEspaco total ocupado: {espaco_total / mega:6.2f} MB')
+saida.write(f'\nEspaco medio ocupado: {(espaco_total / len(usuarios))/ mega:6.2f} MB')
+# Fecha o arquivo
+saida.close()
