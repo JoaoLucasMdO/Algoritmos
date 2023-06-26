@@ -28,4 +28,4 @@ Km por litro: 14.5
 Custo: 68.97
 Gasto:155.17R$
 ------------------------------
-O menor consumo é: kicks
+O menor consumo é: kwid
